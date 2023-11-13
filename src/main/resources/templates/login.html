@@ -1,15 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
-    <head>
-        <title>ログイン画面</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <h1>ログイン画面です</h1>
-    </body>
+<html xmlns:th="http://www.thymleaf.org">
+  <head>
+    <title>ログイン画面</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h2>ログイン画面</h2>
+    <span th:text="${errorMsg}"></span>
+    <form th:action="@{/login}" method="post" th:object="${loginForm}">
+      <div>
+        <label>ログインID</label>
+        <input type="text" th:field="*{loginId}">
+      </div>
+      <div>
+        <label>パスワード</label>
+        <input type="password" th:field="*{password}">
+      </div>
+      <div>
+        <input type="submit" value="ログイン">
+      </div>
+    </form>
+  </body>
 </html>
