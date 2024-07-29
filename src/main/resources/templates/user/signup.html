@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザー登録画面</title>
+</head>
+<body>
+  <div th:insert="common/sourceList :: sourceList"></div>
+  <div th:replace="common/messageIcon :: messageIcon"></div>
+  <div th:replace="common/header :: header"></div>
+  <div class="container-fluid">
+    <h2>ユーザー登録画面</h2>
+    <div class="alert d-flex align-items-center" th:classappend="|${isError ? 'alert-danger' : 'alert-primary'}|" role="alert" th:if="${message != null}">
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24">
+        <use xlink:href="#exclamation-triangle-fill" th:if="${isError}"/>
+        <use xlink:href="#info-fill" th:unless="${isError}"/>
+      </svg>
+      <span th:text="${message}"></span>
+    </div>
+    <form th:action="@{/signup}" method="post" th:object="${signupForm}">
+      <div class="form-group">
+        <div class="col-3 col-md-2 col-xxl-1">
+          <p><label for="name">氏名</label>
+          <input class="form-control" type="text" th:field="*{name}">
+        </div>
+        <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">入力は必須です。</span>
+        <div class="col-3 col-md-2 col-xxl-1">
+          <p><label>メールアドレス</label>
+          <input class="form-control" type="text" th:field="*{mailAddress}">
+        </div>
+        <span class="text-danger" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}">入力は必須です。</span>
+        <div class="col-3 col-md-2 col-xxl-1">
+          <p><label for="password">パスワード</label>
+          <input class="form-control" type="password" th:field="*{password}">
+        </div>
+        <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">入力は必須です。</span>
+        <p><input class="btn btn-primary" type="submit" value="ユーザー登録">
+      </div>
+    </form>
+    <a th:href="@{/login}">▶ログイン画面へ</a>
+  </div>
+</body>
+</html>

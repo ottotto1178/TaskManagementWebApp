@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.2.2/event-calendar.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.2.2/event-calendar.min.js"></script>
+  <title>メインメニュー</title>
+</head>
+<body>
+  <div th:insert="~{common/sourceList :: sourceList}"></div>
+  <div th:replace="common/header :: header"></div>
+  <div class="container-fruid">
+    <h2>メインメニュー</h2>
+    <div id="ec"></div>
+    <!-- カレンダーの右に直近の要素または優先度の高い要素を3つ表示(どちらを表示するかはタブで切り替え※js) -->
+    <div class="mt-3">
+      <a th:href="@{/platform}" class="platform-link">▶使用されている就職支援プラットフォームの追加はこちら</a>
+      <a th:href="@{/company}" class="company-link">▶エントリー済みの企業一覧はこちら</a>
+    </div>
+  </div>
+  <div id="black-background">
+  </div>
+</body>
+<script>
+let ec = new EventCalendar($('#ec')[0], {
+  view: 'dayGridMonth',
+  date: new Date(),
+  dayCellFormat: function(date) {
+    return date.getDate().toString().padStart(2, '0');
+  },
+  events: [
+    // json形式でコントローラーからイベントを取得↓構文
+    {start: "2024-07-01", end: "2024-07-03", title: "イベント1", textColor: "#000000", color: "#FFFF00"},
+  ],
+  dateClick: function (info) {
+    console.log('dateClick');
+    console.log(info);
+    displayForm('register');
+  },
+  eventClick: function (info) {
+    console.log('eventClick');
+    console.log(info);
+    displayForm('edit');
+  }
+});
+
+function displayForm(registerOrEdit) {
+  $('#black-background').show();
+  $.ajax({
+    url: '/event/form/' + registerOrEdit,
+    type: 'GET',
+    success: function(data) {
+      $('#black-background').show().append('<div id="event-form">' + data + '</div>');
+    },
+    error: function(error) {
+      console.log('Error:', error);
+    }
+  });
+}
+
+$('#black-background').click(function(e) {
+  if ($(this).find('#event-form').length != 0) {
+    $('#black-background').hide();
+  }
+})
+</script>
+</html>
