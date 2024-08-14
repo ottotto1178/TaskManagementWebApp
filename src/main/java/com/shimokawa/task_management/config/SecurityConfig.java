@@ -44,6 +44,7 @@ public class SecurityConfig {
         login -> login.loginPage("/login") // LoginControllerのviewメソッドを呼び出す
               .usernameParameter(USERNAME_PARAMETER) // ログイン画面のメールアドレスを取得
               .defaultSuccessUrl("/menu") // ログイン成功時のリダイレクト先
+              .failureUrl("/login?error=true")
       )
       .logout(
         logout -> logout.logoutSuccessUrl("/").permitAll()

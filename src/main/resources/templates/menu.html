@@ -16,11 +16,10 @@
     <!-- カレンダーの右に直近の要素または優先度の高い要素を3つ表示(どちらを表示するかはタブで切り替え※js) -->
     <div class="mt-3">
       <a th:href="@{/platform}" class="platform-link">▶使用されている就職支援プラットフォームの追加はこちら</a>
-      <a th:href="@{/company}" class="company-link">▶エントリー済みの企業一覧はこちら</a>
+      <a th:href="@{/company}" class="company-link">▶新規企業の登録、エントリー済みの企業一覧はこちら</a>
     </div>
   </div>
-  <div id="black-background">
-  </div>
+  <div id="black-background"></div>
 </body>
 <script>
 let ec = new EventCalendar($('#ec')[0], {

@@ -1,28 +1,14 @@
-<!-- <form th:action="@{/user/{userId}/edit(userId=${user.userId})}" th:object="${user}" method="post">
-  <div>
-    <h2>ユーザー詳細</h2>
-    <div>
-      <label for="name">名前:</label>
-      <input type="text" id="name" th:field="*{name}">
-    </div>
-    <div>
-      <label for="mail-address">メールアドレス:</label>
-      <input type="text" id="mail-address" th:field="*{mailAddress}">
-    </div>
-    <div>
-      <label for="password">パスワード:</label>
-      <input type="password" id="password" th:field="*{password}">
-    </div>
-    <div>
-      <input class="btn btn-primary" type="submit" value="新規タスク追加">
-    </div>
-  </div>
-</form> -->
 <p th:fragment="form">register</p>
 <!-- model.addAttribute("platforms", platforms);を一覧表示 -->
-<!-- <form th:action="@{/event/register}" th:object="${eventForm}" method="post">
+<form th:action="@{/event/register}" th:object="${taskForm}" method="post">
   <div>
     <h2>イベント登録</h2>
+    <div>
+      <label for="company-id">企業:</label>
+      <select id="company-id" th:field="*{companyId}">
+        <option th:each="company : ${companies}" th:value="${company.companyId}" th:text="${company.name}"></option>
+      </select>
+    </div>
     <div>
       <label for="name">イベント名:</label>
       <input type="text" id="name" th:field="*{name}">
@@ -34,14 +20,15 @@
     <div>
       <label for="platform">プラットフォーム:</label>
       <select id="platform" th:field="*{platform}">
-        <option th:each="platform : ${platforms}" th:value="${platform.id}" th:text="${platform.name}"></option>
+        <option th:each="platform : ${platforms}" th:value="${platform.platformId}" th:text="${platform.name}"></option>
       </select>
     </div>
     <div>
       <input class="btn btn-primary" type="submit" value="登録">
     </div>
   </div>
-</form> -->
+</form>
 <ul>
   <li th:each="platform : ${platforms}" th:text="${platform.name}"></li>
+  <li th:each="platform : ${platforms}" th:text="${platform.platformId}"></li>
 </ul>

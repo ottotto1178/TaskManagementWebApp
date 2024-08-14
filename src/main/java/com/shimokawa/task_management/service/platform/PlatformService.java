@@ -10,7 +10,6 @@ public interface PlatformService {
   /**
    * プラットフォーム一覧検索
    * 
-   * @param userId ユーザーID
    * @return 検索結果
    */
   public List<Platform> findAll();

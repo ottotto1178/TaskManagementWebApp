@@ -1,7 +1,5 @@
 package com.shimokawa.task_management.entity;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,21 +21,17 @@ public class Company {
   @Column(name = "name")
   private String name;
 
+  /** ユーザーID */
+  @Column(name = "user_id")
+  private Integer userId;
+
   /** プラットフォームID */
   @Column(name = "platform_id")
-  private int platformId;
+  private Integer platformId;
 
   /** ステータスID */
   @Column(name = "status_id")
-  private int statusId;
-
-  /** 次回日程 */
-  @Column(name = "next_schedule_date")
-  private Date nextScheduleDate;
-
-  /** 優先度 */
-  @Column(name = "priority")
-  private int priority;
+  private Integer statusId;
 
   /** デフォルトコンストラクタ */
   public Company() {
