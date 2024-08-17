@@ -17,7 +17,6 @@ public class GrobalUserameControllerAdvice {
       model.addAttribute("username", userDetails.getUsername());
       // ユーザーIDを取得
       model.addAttribute("userId", userDetails.getUserId());
-      
     }
   }
 }

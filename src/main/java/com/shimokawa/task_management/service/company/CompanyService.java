@@ -21,4 +21,12 @@ public interface CompanyService {
    * @param form 会社情報
    */
   public Optional<Company> registerCompany(CompanyForm form);
+
+  /**
+   * 既存のものか確認
+   * 
+   * @param form 入力情報
+   * @return 既存のものがあればtrue、なければfalse
+   */
+  public boolean isExistCompany(CompanyForm form);
 }

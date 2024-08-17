@@ -17,6 +17,8 @@
         <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
           <p><label for="name">企業名:</label></p>
           <input type="text" id="name" th:field="*{name}" style="display: block;">
+          <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></div>
+          <div th:if="${isExist}" class="text-danger" th:text="${isExist}"></div>
         </div>
         <input type="hidden" name="userId" th:value="${userId}">
         <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
@@ -24,7 +26,7 @@
             <option value="" th:text="'プラットフォームを選択してください'"></option>
             <option th:each="platform : ${platforms}" th:value="${platform.platformId}" th:text="${platform.name}"></option>
           </select>
-          <div th:if="${#fields.hasErrors('platformId')}" th:errors="*{platformId}" class="text-danger"></div>
+          <div th:if="${#fields.hasErrors('platformId')}" class="text-danger" th:errors="*{platformId}"></div>
         </div>
         <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
           <select th:field="*{statusId}">
@@ -35,11 +37,19 @@
             <option value="5">内定</option>
             <option value="6">内定辞退</option>
           </select>
+          <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}"></div>
         </div>
         <p><input class="btn btn-primary" type="submit" value="登録"></p>
       </div>
     </form>
+  </div>
+  <div class="right-container">
+    <h2>登録済みの企業一覧</h2>
+    <div th:each="company : ${companies}">
+      <p th:text="${company.name}"></p>
+    </div>
+  </div>
+</div>
   <div id="black-background"></div>
-  <!-- <p th:text="${userId}"></p> -->
 </body>
 </html>

@@ -37,4 +37,13 @@ public class CompanyServiceImpl implements CompanyService {
     var company = mapper.map(form, Company.class);
     return Optional.of(repository.save(company));
   }
+
+  /**
+   * @inhrtitDoc
+   */
+  @Override
+  public boolean isExistCompany(CompanyForm form) {
+    // 既に登録されているならtrueを、そうでなければfalseを返す
+    return repository.findByNameAndUserId(form.getName(), form.getUserId()).isPresent();
+  }
 }
