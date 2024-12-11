@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 .platform-form{
   height: 50%;
   width: 50%;
@@ -13,6 +18,21 @@
 
 .platform-link, .company-link{
   display: block;
+}
+
+.company-index {
+  display: flex;
+  height: 100%;
+}
+
+.company-index .container-fluid {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* コンテンツが多い場合にスクロール可能にする */
+}
+
+.company-index .container-fluid:first-child {
+  border-right: 1px solid #ccc; /* 左側のコンテナに右の境界線を追加 */
 }
 
 #ec{

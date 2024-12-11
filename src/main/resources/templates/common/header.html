@@ -8,7 +8,8 @@
 <body>
   <nav class="navbar bg-info vavbar-dark" th:fragment="header">
     <div class="container-fluid">
-      <a class="navbar-brand" th:href="@{/menu}">就職活動タスク管理システム</a>
+      <a class="navbar-brand" sec:authorize="isAuthenticated()" th:href="@{/menu}">就職活動タスク管理システム</a>
+      <a class="navbar-brand" sec:authorize="isAnonymous()" th:href="@{/}">就職活動タスク管理システム</a>
       <form th:if="${username != null and username != ''}" th:action="@{/logout}" method="post">
         <a th:href="@{/user/{userId}(userId=${userId})}">
           <span th:text="${username}"></span>

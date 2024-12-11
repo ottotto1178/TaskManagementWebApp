@@ -33,14 +33,19 @@ public class SignupController {
   }
 
   @PostMapping("/signup")
-  public void signup(Model model, @Validated SignupForm form, BindingResult bdResult){
+  public String signup(Model model, @Validated SignupForm form, BindingResult bdResult){
     if(bdResult.hasErrors()){
       editGuideMessage(model, "common.formError", true);
-      return;
+      return "user/signup";
     }
     var userInfoOpt = service.registerUserInfo(form);
     var signupMessage = judgeMessageKey(userInfoOpt);
     editGuideMessage(model, signupMessage.getMessage(), signupMessage.isError());
+    if (signupMessage.isError() == true) {
+      return "user/signup";
+    } else {
+      return "redirect:menu";
+    }
   }
 
   private void editGuideMessage(Model model, String messageId, boolean isError){

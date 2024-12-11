@@ -3,23 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.2.2/event-calendar.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@3.2.2/event-calendar.min.js"></script>
-  <title>メインメニュー</title>
+  <title>企業詳細</title>
 </head>
 <body>
   <div th:insert="~{common/sourceList :: sourceList}"></div>
-  <div th:replace="common/header :: header"></div>
+  <div th:insert="~{common/header :: header}"></div>
   <div class="company-index">
     <div class="container-fluid">
-      <h2>新規企業登録</h2>
+      <h2>企業情報編集</h2>
       <form th:action="@{/registerCompany}" th:object="${companyForm}" method="post">
         <div class="form-group">
           <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
-            <div style="display: flex; height: 30px;">
-              <p><label for="name" style="width: 60px;">企業名:</label></p>
-              <input type="text" id="name" th:field="*{name}" style="display: block;">
-            </div>
+            <p><label for="name">企業名:</label></p>
+            <input type="text" id="name" th:field="*{name}" style="display: block;">
             <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></div>
             <div th:if="${isExist}" class="text-danger" th:text="${isExist}"></div>
           </div>
@@ -38,19 +34,18 @@
             </select>
             <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}"></div>
           </div>
-          <p><input class="btn btn-primary" type="submit" value="登録"></p>
+          <p><input class="btn btn-primary" type="submit" value="編集"></p>
         </div>
       </form>
     </div>
     <div class="container-fluid">
-      <h2>登録済みの企業一覧</h2>
-      <div th:each="company : ${companies}">
-        <a th:href="@{/company/{companyId}(companyId=${company.companyId})}">
-          <span th:text="${company.name}"></span>
-        </a>
-      </div>
+      <h2>企業詳細</h2>
+      <p><strong>企業名:</strong> <span th:text="${company.name}"></span></p>
+      <p><strong>利用プラットフォーム:</strong> <span th:text="${registerPlatform.name}"></span></p>
+      <p><strong>ステータス:</strong> <span th:if="${status != null}" th:text="${status.name}"></span></p>
+      <p>今後の流れ</p>
+      <!-- イベント実装後にDBに登録した予定一覧を表示 -->
     </div>
   </div>
-  <div id="black-background"></div>
 </body>
 </html>
