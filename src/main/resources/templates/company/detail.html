@@ -11,7 +11,7 @@
   <div class="company-index">
     <div class="container-fluid">
       <h2>企業情報編集</h2>
-      <form th:action="@{/registerCompany}" th:object="${companyForm}" method="post">
+      <form th:action="@{'/company/update/' + ${company.id}}" th:object="${companyForm}" method="post">
         <div class="form-group">
           <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
             <p><label for="name">企業名:</label></p>
@@ -25,14 +25,14 @@
               <option value="" th:text="'プラットフォームを選択してください'"></option>
               <option th:each="platform : ${platforms}" th:value="${platform.platformId}" th:text="${platform.name}"></option>
             </select>
-            <div th:if="${#fields.hasErrors('platformId')}" class="text-danger" th:errors="*{platformId}"></div>
+            <div th:if="${#fields.hasErrors('platformId')}" class="text-danger" th:errors="*{platformId}" style="width: 210px;"></div>
           </div>
           <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
             <select th:field="*{statusId}">
               <option value="" th:text="'ステータスを選択してください'"></option>
               <option th:each="status : ${statusList}" th:value="${status.statusId}" th:text="${status.name}"></option>
             </select>
-            <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}"></div>
+            <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}" style="width: 210px;"></div>
           </div>
           <p><input class="btn btn-primary" type="submit" value="編集"></p>
         </div>

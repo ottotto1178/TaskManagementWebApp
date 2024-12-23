@@ -39,7 +39,6 @@ public class CompanyController {
 
   @GetMapping("/company/{companyId}")
   public String companyInfo(@PathVariable("companyId") Integer companyId, Model model) {
-    model.addAttribute("platforms", platformService.findAll());
     setModel(model);
     return companyService.viewDisplay(companyId, model, "detail");
   }
@@ -51,7 +50,7 @@ public class CompanyController {
       return "company/index";
     } else {
       if (companyService.isExistCompany(form)) {
-        model.addAttribute("platforms", platformService.findAll());
+        setModel(model);
         String errorMessage = messageSource.getMessage("company.isExist", null, null);
         model.addAttribute("isExist", errorMessage);
         return "company/index";
@@ -61,7 +60,7 @@ public class CompanyController {
     return "redirect:/company";
   }
 
-  @PostMapping("/company/update/{companyId}") 
+  @PostMapping("/company/update/{companyId}")
   public String updateCompany(@PathVariable("companyId") Integer companyId, @Validated CompanyForm form, Model model) {
     companyService.updateCompany(companyId, form);
     return "redirect:/company/" + companyId;

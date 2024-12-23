@@ -20,8 +20,8 @@
               <p><label for="name" style="width: 60px;">企業名:</label></p>
               <input type="text" id="name" th:field="*{name}" style="display: block;">
             </div>
-            <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></div>
-            <div th:if="${isExist}" class="text-danger" th:text="${isExist}"></div>
+            <div th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}" style="width: 250px;"></div>
+            <div th:if="${isExist}" class="text-danger" th:text="${isExist}" style="width: 200px;"></div>
           </div>
           <input type="hidden" name="userId" th:value="${userId}">
           <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
@@ -29,14 +29,14 @@
               <option value="" th:text="'プラットフォームを選択してください'"></option>
               <option th:each="platform : ${platforms}" th:value="${platform.platformId}" th:text="${platform.name}"></option>
             </select>
-            <div th:if="${#fields.hasErrors('platformId')}" class="text-danger" th:errors="*{platformId}"></div>
+            <div th:if="${#fields.hasErrors('platformId')}" class="text-danger" th:errors="*{platformId}" style="width: 210px;"></div>
           </div>
           <div class="col-3 col-md-2 col-xxl-1" style="margin-bottom: 20px;">
             <select th:field="*{statusId}">
               <option value="" th:text="'ステータスを選択してください'"></option>
               <option th:each="status : ${statusList}" th:value="${status.statusId}" th:text="${status.name}"></option>
             </select>
-            <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}"></div>
+            <div th:if="${#fields.hasErrors('statusId')}" class="text-danger" th:errors="*{statusId}" style="width: 210px;"></div>
           </div>
           <p><input class="btn btn-primary" type="submit" value="登録"></p>
         </div>
@@ -45,7 +45,7 @@
     <div class="container-fluid">
       <h2>登録済みの企業一覧</h2>
       <div th:each="company : ${companies}">
-        <a th:href="@{/company/{companyId}(companyId=${company.companyId})}">
+        <a th:href="@{/company/{companyId}(companyId=${company.id})}">
           <span th:text="${company.name}"></span>
         </a>
       </div>

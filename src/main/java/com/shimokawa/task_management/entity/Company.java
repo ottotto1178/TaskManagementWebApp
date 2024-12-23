@@ -15,7 +15,7 @@ public class Company {
   /** 企業ID */
   @Id
   @Column(name = "id")
-  private int companyId;
+  private int id;
 
   /** 企業名 */
   @Column(name = "name")

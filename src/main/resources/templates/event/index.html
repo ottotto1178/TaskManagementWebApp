@@ -1,0 +1,32 @@
+<div th:fragment="form">
+  <h1><span th:text="${#dates.format(date, 'yyyy/MM/dd')}"></span></h1>
+  <!-- model.addAttribute("platforms", platforms);を一覧表示 -->
+  <form th:action="@{/event/register}" th:object="${eventForm}" method="post">
+    <div style="margin: 0 auto;">
+      <h2>イベント登録</h2>
+      <input type="hidden" name="userId" th:value="${userId}">
+      <div>
+        <label for="company-id">企業:</label>
+        <select id="company-id" th:field="*{companyId}">
+          <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+        </select>
+        <div th:if="${#fields.hasErrors('companyId')}" class="text-danger" th:errors="*{companyId}" style="width: 250px;"></div>
+      </div>
+      <div>
+        <label for="event">イベント:</label>
+        <input type="text" id="event" th:field="*{event}">
+        <div th:if="${#fields.hasErrors('event')}" class="text-danger" th:errors="*{event}" style="width: 250px;"></div>
+      </div>
+      <div style="display: none;">
+        <input type="date" id="date" th:field="*{date}">
+      </div>
+      <div>
+        <label for="note">備考:</label>
+        <textarea id="note" th:field="*{note}"></textarea>
+      </div>
+      <div>
+        <input class="btn btn-primary" type="submit" value="登録">
+      </div>
+    </div>
+  </form>
+</div>
